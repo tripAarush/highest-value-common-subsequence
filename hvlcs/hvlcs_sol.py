@@ -1,23 +1,6 @@
 import sys
 
-# getting the values from the input format
-def read_input_file(filename):
-    with open(filename, "r") as f:
-        lines = [line.strip() for line in f if line.strip()]
-
-    k = int(lines[0])
-    values = {}
-
-    for i in range(1, k + 1):
-        ch, val = lines[i].split()
-        values[ch] = int(val)
-
-    a = lines[k + 1]
-    b = lines[k + 2]
-
-    return values, a, b
-
-# actual dp solution, we take a 2 by 2 matrix which shows max value for i chars of a and j chars of b
+# we take a 2 by 2 matrix which shows max value for i chars of a and j chars of b
 # by the end of the matrix, dp[len(a)][len(b)] gives max value
 # we can remake the subsequence by backtracking through the matrix
 def solve_hvlcs(values, a, b):
@@ -50,9 +33,26 @@ def solve_hvlcs(values, a, b):
     subs.reverse()
     return (dp[n][m], "".join(subs))
 
+# getting the values from the input format
+def read_input_file(filename):
+    with open(filename, "r") as f:
+        lines = [line.strip() for line in f if line.strip()]
+
+    k = int(lines[0])
+    values = {}
+
+    for i in range(1, k + 1):
+        ch, val = lines[i].split()
+        values[ch] = int(val)
+
+    a = lines[k + 1]
+    b = lines[k + 2]
+
+    return values, a, b
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python hvlcs.py <input_file>")
+        print("wrong input or running directory, directory should be inside hvlcs folder")
         sys.exit()
 
     input_file = sys.argv[1]
